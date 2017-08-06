@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<meta charset="utf-8" />
+<title>五星</title>
+
+<style>
+
+</style>
+
+<body>
+
+<div id="my" style="text-alifn:center;position:absolute;top:100px;left:100px;z-index:100;"></div>
+<script src="../src/sonic.js"></script>
+<script>
+
+    var fiveStar = new Sonic({
+
+        width: 300,
+        height: 300,
+        fps: 30,
+
+        strokeColor: '#FF7B24',
+
+        stepsPerFrame: 2,
+        trailLength: 1,
+        pointDistance: .03,
+
+        setup: function() {
+            this._.lineWidth = 5;
+        },
+        step: function(point, index, frame) {
+
+            this._.beginPath();
+
+            for(var i=0;i<5;i++){
+                this._.lineTo(Math.cos((18+72*i - 0)/180*Math.PI) * 40 + 150 ,- Math.sin((18+72*i - 0 )/180*Math.PI) * 40 + 150);
+                this._.lineTo(Math.cos((54+72*i - 0)/180*Math.PI) * 20 + 150 ,- Math.sin((54+72*i - 0 )/180*Math.PI) * 20 + 150);
+            }
+
+            this._.lineWidth = 10;
+            this._.strokeStyle = "#FF2E82";
+            this._.fillStyle = "#333"
+
+            this._.closePath();
+            this._.stroke();
+        },
+        path: [
+            ['line', 161, 137.6, 150, 110, 130.9, 137.7]
+        ]
+
+    });
+
+    fiveStar.play();
+
+    document.body.appendChild(fiveStar.canvas);
+
+    var circle = new Sonic({
+
+        width: 320,
+        height: 320,
+        padding: 5,
+
+        strokeColor: '#FF2E82',
+
+        pointDistance: .01,
+        stepsPerFrame: 3,
+        trailLength: .7,
+
+        step: 'fader',
+
+        setup: function() {
+            this._.lineWidth = 5;
+        },
+
+        path: [
+            ['arc', 50, 50, 50, 0, 360]
+        ]
+
+    });
+
+    circle.play();
+
+    document.getElementById("my").appendChild(circle.canvas);
+
+</script>
+
+</body>
+</html>
